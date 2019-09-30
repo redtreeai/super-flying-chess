@@ -9,11 +9,11 @@
 
 #游戏展示
 
-![](show01.png)
+![](show1.png)
 
-![](show03.png)
+![](show2.png)
 
-![](show02.png)
+![](show3.png)
 
 #规则说明
     
