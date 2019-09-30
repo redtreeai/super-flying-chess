@@ -1,4 +1,16 @@
-(提示，本游戏暂时不支持macos系统，请等待作者适配优化)
+#友情提示
+    
+    1  本游戏暂时不支持macos系统，请等待作者适配优化) 
+    2  win-exe版本下载链接
+    
+       https://pan.baidu.com/s/1mt5aiAoJics4TstFQ-KSBg 提取码: zh3m 复制这段内容后打开百度网盘手机App，操作更方便哦
+       
+       解压文件后点击 开始游戏.exe即可运行
+       
+    3  操作方式几乎为鼠标操作，开启游戏后默认是全屏模式，参数可在logic-loader.py中修改 fullscreen为False,
+        游戏过程中按esc快速退出，按tab查看战况。
+        
+    4  会配置python环境的同学也可以直接运行游戏脚本，详情见下方的运行说明。
 # 游戏介绍
 
     游戏名称 :  飞行棋之大乱斗   The Great Fighting of Flying Chess 
