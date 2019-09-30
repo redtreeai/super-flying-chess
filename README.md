@@ -1,3 +1,4 @@
+(提示，本游戏暂时不支持macos系统，请等待作者适配优化)
 # 游戏介绍
 
     游戏名称 :  飞行棋之大乱斗   The Great Fighting of Flying Chess 
