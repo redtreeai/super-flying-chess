@@ -71,7 +71,7 @@ def dojob(x,y,is_mouse_down,keys):
 
                 t_index = 0
                 for tac in player_runtime.INFO['to_attack_codes']:
-                    ct = pygame.transform.scale(loader.RS[tac], (90, 85))
+                    ct = pygame.transform.scale(loader.RMS[tac][0], (90, 85))
                     if t_index == 0:
                         loader.screen.blit(ct, (860, 510))
                     elif t_index == 1:
