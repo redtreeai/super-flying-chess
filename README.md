@@ -1,6 +1,6 @@
 #友情提示
     
-    1  本游戏暂时不支持macos系统，请等待作者适配优化) 
+    1  本游戏暂时不支持macos系统，请等待作者适配优化
     2  win-exe版本下载链接
     
        https://pan.baidu.com/s/1mt5aiAoJics4TstFQ-KSBg 提取码: zh3m 复制这段内容后打开百度网盘手机App，操作更方便哦
