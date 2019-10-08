@@ -4,7 +4,7 @@
     2  win-exe版本下载链接
     
     链接: https://pan.baidu.com/s/1tMiBiNQBH5dlApqqORetFw 提取码: 7e2a 复制这段内容后打开百度网盘手机App，操作更方便哦
-       
+
     3  操作方式几乎为鼠标操作，开启游戏后默认是全屏模式，参数可在logic-loader.py中修改 fullscreen为False,
         游戏过程中按esc快速退出，按tab查看战况。
         
