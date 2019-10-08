@@ -125,19 +125,25 @@ def dojob(x,y,is_mouse_down,cheros,keys):
             player_runtime.INFO['inzhankuang'] = True
 
     else:
-        ai_choice = random.randint(1,len(player_runtime.INFO['ctb_codes']))
-        if ai_choice==1:
-            player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][0]
-            player_runtime.INFO['stage'] = 2
-        elif ai_choice==2:
-            player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][1]
-            player_runtime.INFO['stage'] = 2
-        elif ai_choice == 3:
-            player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][2]
-            player_runtime.INFO['stage'] = 2
-        elif ai_choice == 4:
-            player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][3]
-            player_runtime.INFO['stage'] = 2
+        clen = len(player_runtime.INFO['ctb_codes'])
+        if clen<1:
+            player_runtime.INFO['ctb_codes'] = []
+            # 跳到结算步骤b
+            player_runtime.INFO['stage'] = 5
+        else:
+            ai_choice = random.randint(1,len(player_runtime.INFO['ctb_codes']))
+            if ai_choice==1:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][0]
+                player_runtime.INFO['stage'] = 2
+            elif ai_choice==2:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][1]
+                player_runtime.INFO['stage'] = 2
+            elif ai_choice == 3:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][2]
+                player_runtime.INFO['stage'] = 2
+            elif ai_choice == 4:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][3]
+                player_runtime.INFO['stage'] = 2
 
 
 
