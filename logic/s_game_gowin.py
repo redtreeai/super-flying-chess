@@ -27,11 +27,25 @@ def dojob(x,y,is_mouse_down):
         # 显示女神板
         loader.screen.blit(loader.WISH1, (90, 170))
         # 350350480490
-        if x >= 350 and x <= 480 and y >= 350 and y <= 490 and is_mouse_down == True:
-            # 抽取奖励类型
-            player_runtime.INFO['gowinr_type'] = random.randint(0, 2)
-            # 跳转到显示奖励阶段
-            player_runtime.INFO['gowinr_stage'] = 1
+
+        #人类玩家直接选择
+        if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+
+            if x >= 350 and x <= 480 and y >= 350 and y <= 490 and is_mouse_down == True:
+                # 抽取奖励类型
+                player_runtime.INFO['gowinr_type'] = random.randint(0, 2)
+                # 跳转到显示奖励阶段
+                player_runtime.INFO['gowinr_stage'] = 1
+        else:
+            #AI延迟一秒打开
+            if player_runtime.AITP['gw1']<60:
+                player_runtime.AITP['gw1']= player_runtime.AITP['gw1']+1
+            else:
+                # 抽取奖励类型
+                player_runtime.INFO['gowinr_type'] = random.randint(0, 2)
+                # 跳转到显示奖励阶段
+                player_runtime.INFO['gowinr_stage'] = 1
+                player_runtime.AITP['gw1'] = 0
 
     # 2 查看奖励阶段
     elif player_runtime.INFO['gowinr_stage'] == 1:
@@ -43,9 +57,21 @@ def dojob(x,y,is_mouse_down):
                                            None)
         loader.screen.blit(cw, (140, 300))
 
-        if is_mouse_down==True:
-            player_runtime.INFO['gowinr_lstime']=timer.get_clock()
-            player_runtime.INFO['gowinr_stage'] = 2
+        if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+
+            if is_mouse_down==True:
+                player_runtime.INFO['gowinr_lstime']=timer.get_clock()
+                player_runtime.INFO['gowinr_stage'] = 2
+
+        else:
+            # AI延迟一秒确认
+            if player_runtime.AITP['gw2'] < 60:
+                player_runtime.AITP['gw2'] = player_runtime.AITP['gw2'] + 1
+            else:
+                player_runtime.INFO['gowinr_lstime'] = timer.get_clock()
+                player_runtime.INFO['gowinr_stage'] = 2
+                player_runtime.AITP['gw2'] = 0
+
     # 3确认奖励
     elif player_runtime.INFO['gowinr_stage']==2:
 

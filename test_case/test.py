@@ -4,6 +4,8 @@
 # @File    : test.py
 # @Desc :
 
+import random
+
 for x in range(1,5):
     print(x)
 
@@ -15,4 +17,10 @@ print(sum([1,1,1,1]))
 
 '''
 4
+'''
+
+print(random.randint(1,1))
+
+'''
+1
 '''

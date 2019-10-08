@@ -102,32 +102,65 @@ def dojob(x,y,is_mouse_down,keys):
             cpx = int((x-map_sx)/48)
             cpy = int((y-map_sy)/48)
 
-            #
-            zz_index = 0
-            z_index = 0
-            for zz in player_runtime.INFO['zdata']:
-                for z in zz:
-                    if z['in_war']==True and z['gowin']==False and z['px']==cpx and z['py']==cpy:
-                        hit_code=z['code']
-                        loader.screen.blit(loader.SK7, (map_sx-23 + cpx * 48, map_sy-22 + cpy * 48))
-                        player_runtime.INFO['shr_index'] = (zz_index,z_index)
+            #如果是玩家，选择攻击对象，如果是AI，随机开枪
+            if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
 
-                    z_index = z_index + 1
+                zz_index = 0
                 z_index = 0
-                zz_index = zz_index + 1
+                for zz in player_runtime.INFO['zdata']:
+                    for z in zz:
+                        if z['in_war']==True and z['gowin']==False and z['px']==cpx and z['py']==cpy:
+                            hit_code=z['code']
+                            loader.screen.blit(loader.SK7, (map_sx-23 + cpx * 48, map_sy-22 + cpy * 48))
+                            player_runtime.INFO['shr_index'] = (zz_index,z_index)
 
-            if is_mouse_down==True:
-                if hit_code<0:
-                    player_runtime.INFO['in_skill']=False
+                        z_index = z_index + 1
+                    z_index = 0
+                    zz_index = zz_index + 1
+
+                if is_mouse_down==True:
+                    if hit_code<0:
+                        player_runtime.INFO['in_skill']=False
+                    else:
+                        #狙杀效果播放
+                        player_runtime.INFO['act_skill']=True
+                        player_runtime.INFO['hit_sk_px']=map_sx+12 + cpx * 48
+                        player_runtime.INFO['hit_sk_py']=map_sy-22 + cpy * 48
+                        player_runtime.INFO['hit_sk_pya'] = map_sy - 62 + cpy * 48
+
+                        #开枪后进入冷却
+                        player_runtime.INFO['lr_power']= -1
+
+            else:
+                zz_index = 0
+                z_index = 0
+                h_flag=False
+                z_px = 0
+                z_py = 0
+                for zz in player_runtime.INFO['zdata']:
+                    for z in zz:
+                        if z['in_war'] == True and z['gowin'] == False and random.randint(0,1)==1:
+                            player_runtime.INFO['shr_index'] = (zz_index, z_index)
+                            h_flag=True
+                            z_px = z['px']
+                            z_py = z['py']
+                            break
+
+                        z_index = z_index + 1
+                    z_index = 0
+                    zz_index = zz_index + 1
+
+                if h_flag == True:
+                    # 狙杀效果播放
+                    player_runtime.INFO['act_skill'] = True
+                    player_runtime.INFO['hit_sk_px'] = map_sx + 12 + z_px * 48
+                    player_runtime.INFO['hit_sk_py'] = map_sy - 22 + z_py * 48
+                    player_runtime.INFO['hit_sk_pya'] = map_sy - 62 + z_py * 48
+
+                    # 开枪后进入冷却
+                    player_runtime.INFO['lr_power'] = -1
                 else:
-                    #狙杀效果播放
-                    player_runtime.INFO['act_skill']=True
-                    player_runtime.INFO['hit_sk_px']=map_sx+12 + cpx * 48
-                    player_runtime.INFO['hit_sk_py']=map_sy-22 + cpy * 48
-                    player_runtime.INFO['hit_sk_pya'] = map_sy - 62 + cpy * 48
-
-                    #开枪后进入冷却
-                    player_runtime.INFO['lr_power']= -1
+                    player_runtime.INFO['in_skill'] = False
 
 
     #天使
@@ -168,31 +201,63 @@ def dojob(x,y,is_mouse_down,keys):
             cpx = int((x - map_sx) / 48)
             cpy = int((y - map_sy) / 48)
 
-            zz_index = 0
-            z_index = 0
-            for zz in player_runtime.INFO['zdata']:
-                for z in zz:
-                    if z['in_war'] == True and z['gowin'] == False and z['px'] == cpx and z['py'] == cpy:
-                        hit_code = z['code']
-                        loader.screen.blit(loader.XIANNVBANG, (map_sx - 23 + cpx * 48, map_sy - 22 + cpy * 48))
-                        player_runtime.INFO['shr_index'] = (zz_index, z_index)
-
-                    z_index = z_index + 1
+            if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+                zz_index = 0
                 z_index = 0
-                zz_index = zz_index + 1
+                for zz in player_runtime.INFO['zdata']:
+                    for z in zz:
+                        if z['in_war'] == True and z['gowin'] == False and z['px'] == cpx and z['py'] == cpy:
+                            hit_code = z['code']
+                            loader.screen.blit(loader.XIANNVBANG, (map_sx - 23 + cpx * 48, map_sy - 22 + cpy * 48))
+                            player_runtime.INFO['shr_index'] = (zz_index, z_index)
 
-            if is_mouse_down == True:
-                if hit_code < 0:
-                    player_runtime.INFO['in_skill'] = False
-                else:
-                    # 狙杀效果播放
+                        z_index = z_index + 1
+                    z_index = 0
+                    zz_index = zz_index + 1
+
+                if is_mouse_down == True:
+                    if hit_code < 0:
+                        player_runtime.INFO['in_skill'] = False
+                    else:
+                        # 效果播放
+                        player_runtime.INFO['act_skill'] = True
+                        player_runtime.INFO['hit_sk_px'] = map_sx + 12 + cpx * 48
+                        player_runtime.INFO['hit_sk_py'] = map_sy - 22 + cpy * 48
+                        player_runtime.INFO['hit_sk_pya'] = map_sy - 62 + cpy * 48
+
+                        # 治疗后进入冷却
+                        player_runtime.INFO['ts_power'] = -1
+            else:
+                zz_index = 0
+                z_index = 0
+                h_flag = False
+                z_px = 0
+                z_py = 0
+                for zz in player_runtime.INFO['zdata']:
+                    for z in zz:
+                        if z['in_war'] == True and z['gowin'] == False and random.randint(0, 1) == 1:
+                            player_runtime.INFO['shr_index'] = (zz_index, z_index)
+                            h_flag = True
+                            z_px = z['px']
+                            z_py = z['py']
+                            break
+
+                        z_index = z_index + 1
+                    z_index = 0
+                    zz_index = zz_index + 1
+
+                if h_flag == True:
+                    # 效果播放
                     player_runtime.INFO['act_skill'] = True
-                    player_runtime.INFO['hit_sk_px'] = map_sx + 12 + cpx * 48
-                    player_runtime.INFO['hit_sk_py'] = map_sy - 22 + cpy * 48
-                    player_runtime.INFO['hit_sk_pya'] = map_sy - 62 + cpy * 48
+                    player_runtime.INFO['hit_sk_px'] = map_sx + 12 + z_px * 48
+                    player_runtime.INFO['hit_sk_py'] = map_sy - 22 + z_py * 48
+                    player_runtime.INFO['hit_sk_pya'] = map_sy - 62 + z_py * 48
 
                     # 治疗后进入冷却
                     player_runtime.INFO['ts_power'] = -1
+                else:
+                    player_runtime.INFO['in_skill'] = False
+
 
     #屠夫
     elif player_runtime.INFO['moving_code'] == 10:

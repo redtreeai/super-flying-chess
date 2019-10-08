@@ -9,6 +9,7 @@ from logic import loader
 from data import player_runtime
 from data import color_rgb
 import pygame
+import random
 
 
 def dojob(x,y,is_mouse_down,cheros,keys):
@@ -36,11 +37,22 @@ def dojob(x,y,is_mouse_down,cheros,keys):
         if in_war_flag == False:
             mention_words = ['提示', '无法行动，需掷出点数','大于5']
             do_mention(mention_words)
-            if player_runtime.INFO['is_mention'] == True and is_mouse_down == True:
-                player_runtime.INFO['is_mention'] = False
-                player_runtime.INFO['ctb_codes']=[]
-                # 跳到结算步骤b
-                player_runtime.INFO['stage'] = 5
+            #如果是玩家，手动点击跳过，如果是AI，1秒后跳过
+            if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+                if player_runtime.INFO['is_mention'] == True and is_mouse_down == True:
+                    player_runtime.INFO['is_mention'] = False
+                    player_runtime.INFO['ctb_codes']=[]
+                    # 跳到结算步骤b
+                    player_runtime.INFO['stage'] = 5
+            else:
+                if player_runtime.AITP['st11'] < 60:
+                    player_runtime.AITP['st11'] = player_runtime.AITP['st11'] + 1
+                else:
+                    player_runtime.INFO['is_mention'] = False
+                    player_runtime.INFO['ctb_codes'] = []
+                    # 跳到结算步骤b
+                    player_runtime.AITP['st11'] = 0
+                    player_runtime.INFO['stage'] = 5
 
         else:
             # 正常执行其他战场角色
@@ -80,35 +92,53 @@ def dojob(x,y,is_mouse_down,cheros,keys):
 
                 control_heros_index = control_heros_index + 1
 
+    # 如果是玩家，手动选择操作英雄，如果是AI，随机选择
+    if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
 
-    # 英雄菜单交互 仅在阶段1可以选择英雄
-    # 1
-    if x >= 860 and x < 950 and y >= 510 and y < 595 and len(player_runtime.INFO['ctb_codes'])>0:
-        loader.screen.blit(loader.SELECT_MENU, (860, 510))
-        if is_mouse_down == True:
+        # 英雄菜单交互 仅在阶段1可以选择英雄
+        # 1
+        if x >= 860 and x < 950 and y >= 510 and y < 595 and len(player_runtime.INFO['ctb_codes'])>0:
+            loader.screen.blit(loader.SELECT_MENU, (860, 510))
+            if is_mouse_down == True:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][0]
+                player_runtime.INFO['stage'] = 2
+        # 2
+        elif x >= 950 and x < 1040 and y >= 510 and y < 595 and len(player_runtime.INFO['ctb_codes'])>1:
+            loader.screen.blit(loader.SELECT_MENU, (950, 510))
+            if is_mouse_down == True:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][1]
+                player_runtime.INFO['stage'] = 2
+        # 3
+        elif x >= 860 and x < 950 and y >= 595 and y < 680 and len(player_runtime.INFO['ctb_codes'])>2:
+            loader.screen.blit(loader.SELECT_MENU, (860, 595))
+            if is_mouse_down == True:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][2]
+                player_runtime.INFO['stage'] = 2
+        # 4
+        elif x >= 950 and x < 1040 and y >= 595 and y < 680 and len(player_runtime.INFO['ctb_codes'])>3:
+            loader.screen.blit(loader.SELECT_MENU, (950, 595))
+            if is_mouse_down == True:
+                player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][3]
+                player_runtime.INFO['stage'] = 2
+
+        if keys['tab'] == 1:
+            player_runtime.INFO['inzhankuang'] = True
+
+    else:
+        ai_choice = random.randint(1,len(player_runtime.INFO['ctb_codes']))
+        if ai_choice==1:
             player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][0]
             player_runtime.INFO['stage'] = 2
-    # 2
-    elif x >= 950 and x < 1040 and y >= 510 and y < 595 and len(player_runtime.INFO['ctb_codes'])>1:
-        loader.screen.blit(loader.SELECT_MENU, (950, 510))
-        if is_mouse_down == True:
+        elif ai_choice==2:
             player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][1]
             player_runtime.INFO['stage'] = 2
-    # 3
-    elif x >= 860 and x < 950 and y >= 595 and y < 680 and len(player_runtime.INFO['ctb_codes'])>2:
-        loader.screen.blit(loader.SELECT_MENU, (860, 595))
-        if is_mouse_down == True:
+        elif ai_choice == 3:
             player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][2]
             player_runtime.INFO['stage'] = 2
-    # 4
-    elif x >= 950 and x < 1040 and y >= 595 and y < 680 and len(player_runtime.INFO['ctb_codes'])>3:
-        loader.screen.blit(loader.SELECT_MENU, (950, 595))
-        if is_mouse_down == True:
+        elif ai_choice == 4:
             player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][3]
             player_runtime.INFO['stage'] = 2
 
-    if keys['tab']==1:
-        player_runtime.INFO['inzhankuang'] = True
 
 
 #创造提示

@@ -109,12 +109,12 @@ def dojob(x,y,is_mouse_down,keys):
                     player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
                     player_runtime.INFO['stage'] = 1
 
-        else: #AI
-            if player_runtime.STAGE_0['lstime']<60:
+        else: #AI  #延时一秒确定
+            if player_runtime.AITP['st0']<60:
                 loader.SEZI_SOUND.play(0)
-                player_runtime.STAGE_0['lstime']= player_runtime.STAGE_0['lstime']+1
+                player_runtime.AITP['st0']= player_runtime.AITP['st0']+1
             else:
                 player_runtime.INFO['sz_num'] = random.randint(0, 5)
                 player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
                 player_runtime.INFO['stage'] = 1
-                player_runtime.STAGE_0['lstime'] = 0
+                player_runtime.AITP['st0'] = 0

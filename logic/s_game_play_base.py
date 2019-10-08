@@ -46,9 +46,9 @@ def dojob():
     if player_runtime.INFO['turn'] == 0:
         loader.screen.blit(loader.CONTROL_BLUE, (860, 510))
         if player_runtime.INFO['pa_turn'][0]==0:
-            turn_text = '蓝方(玩家)'
+            turn_text = '玩家'
         else:
-            turn_text = '蓝方(电脑)'
+            turn_text = 'AI'
         tag_blue = loader.GAME_ROUND_FONT.render(turn_text, True,
                                                  color_rgb.BLUE,
                                                  None)
@@ -56,9 +56,9 @@ def dojob():
     elif player_runtime.INFO['turn'] == 1:
         loader.screen.blit(loader.CONTROL_GREEN, (860, 510))
         if player_runtime.INFO['pa_turn'][1] == 0:
-            turn_text = '绿方(玩家)'
+            turn_text = '玩家'
         else:
-            turn_text = '绿方(电脑)'
+            turn_text = 'AI'
         tag_blue = loader.GAME_ROUND_FONT.render(turn_text, True,
                                                  color_rgb.GREEN,
                                                  None)
@@ -66,9 +66,9 @@ def dojob():
     elif player_runtime.INFO['turn'] == 2:
         loader.screen.blit(loader.CONTROL_YELLOW, (860, 510))
         if player_runtime.INFO['pa_turn'][2] == 0:
-            turn_text = '黄方(玩家)'
+            turn_text = '玩家'
         else:
-            turn_text = '黄方(电脑)'
+            turn_text = 'AI'
         tag_blue = loader.GAME_ROUND_FONT.render(turn_text, True,
                                                  color_rgb.YELLOW,
                                                  None)
@@ -76,9 +76,9 @@ def dojob():
     elif player_runtime.INFO['turn'] == 3:
         loader.screen.blit(loader.CONTROL_RED, (860, 510))
         if player_runtime.INFO['pa_turn'][3] == 0:
-            turn_text = '红方(玩家)'
+            turn_text = '玩家'
         else:
-            turn_text = '红方(电脑)'
+            turn_text = 'AI'
         tag_blue = loader.GAME_ROUND_FONT.render(turn_text, True,
                                                  color_rgb.RED,
                                                  None)

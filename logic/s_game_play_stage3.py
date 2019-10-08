@@ -17,8 +17,10 @@ from data import routes
 
 def dojob(x,y,is_mouse_down,keys):
 
-    if keys['tab']==1:
-        player_runtime.INFO['inzhankuang'] = True
+    #玩家阶段可查看战况
+    if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+        if keys['tab']==1:
+            player_runtime.INFO['inzhankuang'] = True
 
     if player_runtime.INFO['gowinr']==True:
         s_game_gowin.dojob(x,y,is_mouse_down)
@@ -86,91 +88,117 @@ def dojob(x,y,is_mouse_down,keys):
                 # 额外绘制返回按钮
                 loader.screen.blit(loader.BACK, (950, 595))
 
-                # 绘制选择框
-                # 1
-                if x >= 860 and x < 950 and y >= 510 and y < 595 and len(player_runtime.INFO['to_attack_codes']) > 0:
-                    show_help(['选择决斗对象'])
-                    loader.screen.blit(loader.SELECT_MENU, (860, 510))
-                    if is_mouse_down == True:
-                        # 开启普通决斗
-                        player_runtime.INFO['common_fight'] = True
-                        player_runtime.INFO['death_fight'] = False
-                        # 添加决斗名单
-                        player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][0])
-                        player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
-                        # 随机选择决斗场景
-                        player_runtime.INFO['fight_bg'] = random.randint(0, 2)
-                        player_runtime.INFO['left_fighter_px'] = -180
-                        player_runtime.INFO['right_fighter_px'] = 1040
-                        player_runtime.INFO['fight_stage'] = 0
-                        # 如果有剑客，剑客先攻击永远
-                        if player_runtime.INFO['fight_list'][0] == 4:
-                            tmp_code = player_runtime.INFO['fight_list'][0]
-                            player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
-                            player_runtime.INFO['fight_list'][1] = tmp_code
-                        player_runtime.INFO['right_fighter_px'] = 1040
-                        player_runtime.INFO['left_fighter_px'] = -180
-                        player_runtime.INFO['stage'] = 4
-                        player_runtime.INFO['to_attack_codes'] = []
+                #第二个AI抉择点，普通决斗的发起
+                if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+                    # 绘制选择框
+                    # 1
+                    if x >= 860 and x < 950 and y >= 510 and y < 595 and len(player_runtime.INFO['to_attack_codes']) > 0:
+                        show_help(['选择决斗对象'])
+                        loader.screen.blit(loader.SELECT_MENU, (860, 510))
+                        if is_mouse_down == True:
+                            # 开启普通决斗
+                            player_runtime.INFO['common_fight'] = True
+                            player_runtime.INFO['death_fight'] = False
+                            # 添加决斗名单
+                            player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][0])
+                            player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
+                            # 随机选择决斗场景
+                            player_runtime.INFO['fight_bg'] = random.randint(0, 2)
+                            player_runtime.INFO['left_fighter_px'] = -180
+                            player_runtime.INFO['right_fighter_px'] = 1040
+                            player_runtime.INFO['fight_stage'] = 0
+                            # 如果有剑客，剑客先攻击永远
+                            if player_runtime.INFO['fight_list'][0] == 4:
+                                tmp_code = player_runtime.INFO['fight_list'][0]
+                                player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
+                                player_runtime.INFO['fight_list'][1] = tmp_code
+                            player_runtime.INFO['right_fighter_px'] = 1040
+                            player_runtime.INFO['left_fighter_px'] = -180
+                            player_runtime.INFO['stage'] = 4
+                            player_runtime.INFO['to_attack_codes'] = []
 
-                # 2
-                elif x >= 950 and x < 1040 and y >= 510 and y < 595 and len(player_runtime.INFO['to_attack_codes']) > 1:
-                    show_help(['选择决斗对象'])
-                    loader.screen.blit(loader.SELECT_MENU, (950, 510))
-                    if is_mouse_down == True:
-                        # 开启普通决斗
-                        player_runtime.INFO['common_fight'] = True
-                        player_runtime.INFO['death_fight'] = False
-                        # 添加决斗名单
-                        player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][1])
-                        player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
-                        # 随机选择决斗场景
-                        player_runtime.INFO['fight_bg'] = random.randint(0, 2)
-                        player_runtime.INFO['left_fighter_px'] = -180
-                        player_runtime.INFO['right_fighter_px'] = 1040
-                        player_runtime.INFO['fight_stage'] = 0
-                        # 如果有剑客，剑客先攻击永远
-                        if player_runtime.INFO['fight_list'][0] == 4:
-                            tmp_code = player_runtime.INFO['fight_list'][0]
-                            player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
-                            player_runtime.INFO['fight_list'][1] = tmp_code
-                        player_runtime.INFO['right_fighter_px'] = 1040
-                        player_runtime.INFO['left_fighter_px'] = -180
-                        player_runtime.INFO['stage'] = 4
-                        player_runtime.INFO['to_attack_codes'] = []
+                    # 2
+                    elif x >= 950 and x < 1040 and y >= 510 and y < 595 and len(player_runtime.INFO['to_attack_codes']) > 1:
+                        show_help(['选择决斗对象'])
+                        loader.screen.blit(loader.SELECT_MENU, (950, 510))
+                        if is_mouse_down == True:
+                            # 开启普通决斗
+                            player_runtime.INFO['common_fight'] = True
+                            player_runtime.INFO['death_fight'] = False
+                            # 添加决斗名单
+                            player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][1])
+                            player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
+                            # 随机选择决斗场景
+                            player_runtime.INFO['fight_bg'] = random.randint(0, 2)
+                            player_runtime.INFO['left_fighter_px'] = -180
+                            player_runtime.INFO['right_fighter_px'] = 1040
+                            player_runtime.INFO['fight_stage'] = 0
+                            # 如果有剑客，剑客先攻击永远
+                            if player_runtime.INFO['fight_list'][0] == 4:
+                                tmp_code = player_runtime.INFO['fight_list'][0]
+                                player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
+                                player_runtime.INFO['fight_list'][1] = tmp_code
+                            player_runtime.INFO['right_fighter_px'] = 1040
+                            player_runtime.INFO['left_fighter_px'] = -180
+                            player_runtime.INFO['stage'] = 4
+                            player_runtime.INFO['to_attack_codes'] = []
 
-                # 3 最多3个物理攻击对象
-                elif x >= 860 and x < 950 and y >= 595 and y < 680 and len(player_runtime.INFO['to_attack_codes']) > 2:
-                    show_help(['选择决斗对象'])
-                    loader.screen.blit(loader.SELECT_MENU, (860, 595))
-                    if is_mouse_down == True:
-                        # 开启普通决斗
-                        player_runtime.INFO['common_fight'] = True
-                        player_runtime.INFO['death_fight'] = False
-                        # 添加决斗名单
-                        player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][2])
-                        player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
-                        # 随机选择决斗场景
-                        player_runtime.INFO['fight_bg'] = random.randint(0, 2)
-                        player_runtime.INFO['left_fighter_px'] = -180
-                        player_runtime.INFO['right_fighter_px'] = 1040
-                        player_runtime.INFO['fight_stage'] = 0
-                        # 如果有剑客，剑客先攻击永远
-                        if player_runtime.INFO['fight_list'][0] == 4:
-                            tmp_code = player_runtime.INFO['fight_list'][0]
-                            player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
-                            player_runtime.INFO['fight_list'][1] = tmp_code
-                        player_runtime.INFO['right_fighter_px'] = 1040
-                        player_runtime.INFO['left_fighter_px'] = -180
-                        player_runtime.INFO['stage'] = 4
-                        player_runtime.INFO['to_attack_codes'] = []
-                # 4 返回图标
-                elif x >= 950 and x < 1040 and y >= 595 and y < 680:
-                    loader.screen.blit(loader.SELECT_MENU, (950, 595))
-                    show_help(['返回'])
-                    if is_mouse_down == True:
-                        # 返回攻击选择
-                        player_runtime.INFO['to_attack'] = False
+                    # 3 最多3个物理攻击对象
+                    elif x >= 860 and x < 950 and y >= 595 and y < 680 and len(player_runtime.INFO['to_attack_codes']) > 2:
+                        show_help(['选择决斗对象'])
+                        loader.screen.blit(loader.SELECT_MENU, (860, 595))
+                        if is_mouse_down == True:
+                            # 开启普通决斗
+                            player_runtime.INFO['common_fight'] = True
+                            player_runtime.INFO['death_fight'] = False
+                            # 添加决斗名单
+                            player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][2])
+                            player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
+                            # 随机选择决斗场景
+                            player_runtime.INFO['fight_bg'] = random.randint(0, 2)
+                            player_runtime.INFO['left_fighter_px'] = -180
+                            player_runtime.INFO['right_fighter_px'] = 1040
+                            player_runtime.INFO['fight_stage'] = 0
+                            # 如果有剑客，剑客先攻击永远
+                            if player_runtime.INFO['fight_list'][0] == 4:
+                                tmp_code = player_runtime.INFO['fight_list'][0]
+                                player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
+                                player_runtime.INFO['fight_list'][1] = tmp_code
+                            player_runtime.INFO['right_fighter_px'] = 1040
+                            player_runtime.INFO['left_fighter_px'] = -180
+                            player_runtime.INFO['stage'] = 4
+                            player_runtime.INFO['to_attack_codes'] = []
+                    # 4 返回图标
+                    elif x >= 950 and x < 1040 and y >= 595 and y < 680:
+                        loader.screen.blit(loader.SELECT_MENU, (950, 595))
+                        show_help(['返回'])
+                        if is_mouse_down == True:
+                            # 返回攻击选择
+                            player_runtime.INFO['to_attack'] = False
+                else:
+                    #AI的话，随机选择攻击对象
+                    at_choice = random.randint(0,len(player_runtime.INFO['to_attack_codes'])-1)
+                    # 开启普通决斗
+                    player_runtime.INFO['common_fight'] = True
+                    player_runtime.INFO['death_fight'] = False
+                    # 添加决斗名单
+                    player_runtime.INFO['fight_list'].append(player_runtime.INFO['to_attack_codes'][at_choice])
+                    player_runtime.INFO['fight_list'].append(player_runtime.INFO['moving_code'])
+                    # 随机选择决斗场景
+                    player_runtime.INFO['fight_bg'] = random.randint(0, 2)
+                    player_runtime.INFO['left_fighter_px'] = -180
+                    player_runtime.INFO['right_fighter_px'] = 1040
+                    player_runtime.INFO['fight_stage'] = 0
+                    # 如果有剑客，剑客先攻击永远
+                    if player_runtime.INFO['fight_list'][0] == 4:
+                        tmp_code = player_runtime.INFO['fight_list'][0]
+                        player_runtime.INFO['fight_list'][0] = player_runtime.INFO['fight_list'][1]
+                        player_runtime.INFO['fight_list'][1] = tmp_code
+                    player_runtime.INFO['right_fighter_px'] = 1040
+                    player_runtime.INFO['left_fighter_px'] = -180
+                    player_runtime.INFO['stage'] = 4
+                    player_runtime.INFO['to_attack_codes'] = []
+
 
             else:
                 # 绘制操作菜单
@@ -207,29 +235,52 @@ def dojob(x,y,is_mouse_down,keys):
                     ## 3 防守 跳过回合
                     loader.screen.blit(loader.DEFEND, (860, 595))
 
-                    # 绘制选中框(英雄行为交互)
-                    # 1
-                    if x >= 860 and x < 950 and y >= 510 and y < 595 and len(
-                            player_runtime.INFO['to_attack_codes']) > 0:
-                        loader.screen.blit(loader.SELECT_MENU, (860, 510))
-                        show_help(['发起决斗'])
-                        if is_mouse_down == True:
-                            player_runtime.INFO['to_attack'] = True
-                    # 2
-                    elif x >= 950 and x < 1040 and y >= 510 and y < 595:
-                        loader.screen.blit(loader.SELECT_MENU, (950, 510))
-                        skill_help()
-                        if is_mouse_down == True:
-                            # 清算技能效果
+
+                    #第一个AI抉择点
+                    if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']] == 0:
+
+                        # 绘制选中框(英雄行为交互)
+                        # 1
+                        if x >= 860 and x < 950 and y >= 510 and y < 595 and len(
+                                player_runtime.INFO['to_attack_codes']) > 0:
+                            loader.screen.blit(loader.SELECT_MENU, (860, 510))
+                            show_help(['发起决斗'])
+                            if is_mouse_down == True:
+                                player_runtime.INFO['to_attack'] = True
+                        # 2
+                        elif x >= 950 and x < 1040 and y >= 510 and y < 595:
+                            loader.screen.blit(loader.SELECT_MENU, (950, 510))
+                            skill_help()
+                            if is_mouse_down == True:
+                                # 清算技能效果
+                                check_skill_action()
+                        # 3
+                        elif x >= 860 and x < 950 and y >= 595 and y < 680:
+                            loader.screen.blit(loader.SELECT_MENU, (860, 595))
+                            show_help(['行动结束'])
+                            if is_mouse_down == True:
+                                # 技能不结算，直接跳到5
+                                player_runtime.INFO['to_attack_codes'] = []
+                                player_runtime.INFO['stage'] = 5
+
+                    else:
+                        #AI暂时只发动主动进攻,不发动技能
+                        ai_choice = random.randint(1,3)
+                        if ai_choice==1:
+                            if len(player_runtime.INFO['to_attack_codes']) > 0:
+                                player_runtime.INFO['to_attack'] = True
+                            else:
+                                # 技能不结算，直接跳到5
+                                player_runtime.INFO['to_attack_codes'] = []
+                                player_runtime.INFO['stage'] = 5
+                        elif ai_choice==2:
                             check_skill_action()
-                    # 3
-                    elif x >= 860 and x < 950 and y >= 595 and y < 680:
-                        loader.screen.blit(loader.SELECT_MENU, (860, 595))
-                        show_help(['行动结束'])
-                        if is_mouse_down == True:
+                        else:
                             # 技能不结算，直接跳到5
                             player_runtime.INFO['to_attack_codes'] = []
                             player_runtime.INFO['stage'] = 5
+
+
 
 
 def check_skill_icon():
