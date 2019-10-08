@@ -68,6 +68,7 @@ def dojob(x,y,is_mouse_down):
         while len(cplayers) < 4:
             # 补足四个角色数据
             cplayers.append([])
+
         # 打乱顺序
         random.shuffle(cplayers)
 

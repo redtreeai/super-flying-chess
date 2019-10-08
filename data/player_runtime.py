@@ -22,6 +22,8 @@ space 飞翔/降落
 INFO = {
     #玩家数量
     'player_num':1,
+    #玩家/AI 轮次
+    'pa_turn':[0,0,0,0],
     #选择音频声
     'select_sound':False,
     #首页英雄序号
@@ -189,4 +191,10 @@ FIGHT_ACTION = {
 #场景音乐控制
 MUSIC = {
     'title':False,
+}
+
+
+#场景1AI摇筛子的时间点,默认一秒
+STAGE_0 = {
+    'lstime':0
 }

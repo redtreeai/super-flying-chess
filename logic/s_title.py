@@ -146,6 +146,8 @@ def reset_data():
     info = {
         # 玩家数量
         'player_num': 1,
+        # 玩家/AI 轮次
+        'pa_turn': [0, 0, 0, 0],
         # 选择音频声
         'select_sound': False,
         # 首页英雄序号

@@ -20,7 +20,7 @@ pygame.display.set_caption(config.GAME_NAME+':'+config.VERSION)
 #窗口大小
 WINDOW_SIZE =config.WINDOW_WEIGHT,config.WINDOW_HEIGHT
 #是否全屏模式
-fullscreen=True
+fullscreen=False
 #旧版参数
 # screen = pygame.display.set_mode(WINDOW_SIZE)
 # if fullscreen==True:
