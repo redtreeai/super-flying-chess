@@ -31,18 +31,18 @@ def dojob(x,y,is_mouse_down):
     else:
         player_runtime.INFO['player_num'] = 0
 
-    #暂时没有AI，取消单人游戏
-    if player_runtime.INFO['player_num'] in [2, 3, 4] and is_mouse_down == True:
+    #玩家不够，AI来凑
+    if player_runtime.INFO['player_num'] in [1,2, 3, 4] and is_mouse_down == True:
         # 构造游戏初始数据
         '''
-        由于现在还没有AI，所以仅添加玩家阵营
+        加入AI，直到4个阵营满
         '''
 
         # 1 读取英雄池(深度拷贝)
         player_runtime.INFO['heros_pool'] = copy.deepcopy(hrs.DATA)
         cplayers = []
         # 2 初始化玩家位置
-        for num in range(0, player_runtime.INFO['player_num']):
+        for num in range(0, 4):
             # 构建当前玩家英雄组
             cplayer = []
             while len(cplayer) < 4:
@@ -65,12 +65,17 @@ def dojob(x,y,is_mouse_down):
 
             cplayers.append(cplayer)
 
-        while len(cplayers) < 4:
-            # 补足四个角色数据
-            cplayers.append([])
+        #分配玩家/AI轮次
+        while sum(player_runtime.INFO['pa_turn'])<(4-player_runtime.INFO['player_num']):
+            xp = 0
+            for pa in player_runtime.INFO['pa_turn']:
+                if pa==0:
+                    player_runtime.INFO['pa_turn'][xp]=1
+                    break
+                xp=xp+1
 
         # 打乱顺序
-        random.shuffle(cplayers)
+        random.shuffle(player_runtime.INFO['pa_turn'])
 
         # 分配角色初始化位置
         player_runtime.INFO['zdata'] = cplayers

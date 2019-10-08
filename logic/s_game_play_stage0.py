@@ -65,43 +65,56 @@ def dojob(x,y,is_mouse_down,keys):
         csz = pygame.transform.scale(loader.SZ[player_runtime.INFO['sz_num']], (180, 170))
         loader.screen.blit(csz, (860, 510))
 
-        # 随机产生1到6的一个位数
-        if x >= 860 and x < 1040 and y >= 510 and y < 680:
-            loader.SEZI_SOUND.play(0)
-            player_runtime.INFO['sz_num'] = random.randint(0, 5)
-            if is_mouse_down == True:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
-                player_runtime.INFO['stage'] = 1
 
-            # 作弊按钮
-            elif keys['1'] == 1:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['sz_num'] = 0
+        #操作角色判断 (玩家)
+        if player_runtime.INFO['pa_turn'][player_runtime.INFO['turn']]==0:
+            # 随机产生1到6的一个位数
+            if x >= 860 and x < 1040 and y >= 510 and y < 680:
+                loader.SEZI_SOUND.play(0)
+                player_runtime.INFO['sz_num'] = random.randint(0, 5)
+                if is_mouse_down == True:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+
+                # 作弊按钮
+                elif keys['1'] == 1:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['sz_num'] = 0
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+                elif keys['2'] == 1:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['sz_num'] = 1
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+                elif keys['3'] == 1:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['sz_num'] = 2
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+                elif keys['4'] == 1:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['sz_num'] = 3
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+                elif keys['5'] == 1:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['sz_num'] = 4
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+                elif keys['6'] == 1:
+                    # 进入选择移动角色的阶段
+                    player_runtime.INFO['sz_num'] = 5
+                    player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
+                    player_runtime.INFO['stage'] = 1
+
+        else: #AI
+            if player_runtime.STAGE_0['lstime']<60:
+                loader.SEZI_SOUND.play(0)
+                player_runtime.STAGE_0['lstime']= player_runtime.STAGE_0['lstime']+1
+            else:
+                player_runtime.INFO['sz_num'] = random.randint(0, 5)
                 player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
                 player_runtime.INFO['stage'] = 1
-            elif keys['2'] == 1:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['sz_num'] = 1
-                player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
-                player_runtime.INFO['stage'] = 1
-            elif keys['3'] == 1:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['sz_num'] = 2
-                player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
-                player_runtime.INFO['stage'] = 1
-            elif keys['4'] == 1:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['sz_num'] = 3
-                player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
-                player_runtime.INFO['stage'] = 1
-            elif keys['5'] == 1:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['sz_num'] = 4
-                player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
-                player_runtime.INFO['stage'] = 1
-            elif keys['6'] == 1:
-                # 进入选择移动角色的阶段
-                player_runtime.INFO['sz_num'] = 5
-                player_runtime.INFO['left_steps'] = player_runtime.INFO['sz_num'] + 1
-                player_runtime.INFO['stage'] = 1
+                player_runtime.STAGE_0['lstime'] = 0
