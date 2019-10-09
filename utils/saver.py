@@ -118,9 +118,9 @@ def transtime(t):
 #打包前要重置
 #重置存档
 
-# SDATA = {
-#     'slot1':'null',
-#     'slot2':'null',
-#     'slot3':'null'
-# }
-# save(SDATA,'../save/tsd.pkl')
+SDATA = {
+    'slot1':'null',
+    'slot2':'null',
+    'slot3':'null'
+}
+save(SDATA,'../save/tsd.pkl')

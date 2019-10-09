@@ -8,7 +8,6 @@ from data import color_rgb
 import config
 import sys, pygame
 from data import title_page
-from data import game_page
 
 
 print(config.GAME_NAME+config.VERSION+'程序初始化中......')
