@@ -10,7 +10,7 @@ WINDOW_HEIGHT = 680
 
 #The Great Fighting of Flying Ches
 GAME_NAME = '飞行棋之大乱斗'
-VERSION = 'V0.1测试版'
+VERSION = 'V0.2 easy_ai版本'
 
 # 获取部署目录,ROOT_PATH即可作为工程中的绝对路径根目录，方便业务逻辑调用
 # ROOT_PATH = os.popen('pwd', 'r', 1).read()
