@@ -1,14 +1,27 @@
 #友情提示
     
-    1  本游戏暂时不支持macos系统，请等待作者适配优化
-    2  win-exe版本下载链接
-    
-    链接: https://pan.baidu.com/s/1eRPUkPcGEUdYItxQKMTXfQ 提取码: rkxa 复制这段内容后打开百度网盘手机App，操作更方便哦 (20191009更新)
-
-    3  操作方式几乎为鼠标操作，开启游戏后默认是全屏模式，参数可在logic-loader.py中修改 fullscreen为False,
+    1  游戏支持windows平台(exe)/linux平台(直接编译python脚本运行),但不支持Macos系统(MOjave版本冲突).  
+    2  操作方式几乎为鼠标操作，开启游戏后默认是全屏模式，参数可在logic-loader.py中修改 fullscreen为False,
         游戏过程中按esc快速退出，按tab查看战况。
-        
-    4  会配置python环境的同学也可以直接运行游戏脚本，详情见下方的运行说明。
+    3  会配置python环境的同学也可以直接运行游戏脚本，详情见下方的运行说明。
+    4  后续考虑加入移动端。
+    
+#最新版本下载地址
+
+[百度云](https://pan.baidu.com/s/1eRPUkPcGEUdYItxQKMTXfQ)  
+
+(提取码:rkxa) 
+
+(20191009更新)
+
+[坚果云](https://www.jianguoyun.com/p/DUSzAdIQprfnBxii9PsB) 
+
+(20191009更新)
+
+坚果云扫码下载
+
+![](download.png)
+
 # 游戏介绍
 
     游戏名称 :  飞行棋之大乱斗   The Great Fighting of Flying Chess 
