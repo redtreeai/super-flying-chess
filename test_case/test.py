@@ -19,7 +19,7 @@ print(sum([1,1,1,1]))
 4
 '''
 
-print(random.randint(1,1))
+print(random.randint(0,0))
 
 '''
 1

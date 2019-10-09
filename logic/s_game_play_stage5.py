@@ -4,8 +4,7 @@
 # @File    : s_game_play_stage5.py
 # @Desc : 结算阶段
 
-from logic import loader
-from data import color_rgb
+
 from data.heros import hrs
 from data import player_runtime
 import copy
@@ -132,7 +131,6 @@ def dojob():
        z_index = 0
        zd_index = zd_index + 1
 
-
    #非提示状态下继续操作
    if player_runtime.INFO['is_mention']==False:
        # 重置步骤状态
@@ -148,6 +146,5 @@ def dojob():
                #回合数+1
                player_runtime.INFO['round']= player_runtime.INFO['round']+1
                player_runtime.INFO['turn'] = 0
-
 
 

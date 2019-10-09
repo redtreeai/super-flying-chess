@@ -105,20 +105,20 @@ def dojob():
         right_def = player_runtime.INFO['zdata'][right_code[0]][right_code[1]]['defend']
 
         #奥特曼技能处理  (测试是否攻击力会回调)
-        if left_code==15 and right_code==3:
+        if player_runtime.INFO['fight_list'][0]==15 and player_runtime.INFO['fight_list'][1]==3:
             right_atv=right_atv*5
-        elif left_code ==3 and right_code==15:
+        elif player_runtime.INFO['fight_list'][0]==3 and player_runtime.INFO['fight_list'][1]==15:
             left_atv=left_atv*5
 
         #狼人技能 夜王，夜晚攻击力翻倍(测试是否攻击力会回调)
         if not player_runtime.INFO['round'] % 4 in [1, 2] :
-            if left_code==12:
+            if player_runtime.INFO['fight_list'][0] ==12:
                 left_atv=left_atv*2
-            elif right_code==12:
+            elif player_runtime.INFO['fight_list'][1]==12:
                 right_atv=right_atv*2
 
         # 怪兽技能 为什么要打我？  被动决斗或死斗  防御翻倍。
-        if left_code==15:
+        if player_runtime.INFO['fight_list'][0]==15:
             left_def=left_def*2
 
         lw = 0

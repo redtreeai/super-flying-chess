@@ -77,6 +77,9 @@ def dojob(x,y,is_mouse_down):
         # 打乱顺序
         random.shuffle(player_runtime.INFO['pa_turn'])
 
+        #全部都是AI，测试AI逻辑是否有bug
+        #player_runtime.INFO['pa_turn']=[1,1,1,1]
+
         # 分配角色初始化位置
         player_runtime.INFO['zdata'] = cplayers
         zd_index = 0

@@ -116,6 +116,7 @@ def dojob(x,y,is_mouse_down,keys):
                             player_runtime.INFO['left_fighter_px'] = -180
                             player_runtime.INFO['stage'] = 4
                             player_runtime.INFO['to_attack_codes'] = []
+                            player_runtime.INFO['to_attack'] = False
 
                     # 2
                     elif x >= 950 and x < 1040 and y >= 510 and y < 595 and len(player_runtime.INFO['to_attack_codes']) > 1:
@@ -142,6 +143,8 @@ def dojob(x,y,is_mouse_down,keys):
                             player_runtime.INFO['left_fighter_px'] = -180
                             player_runtime.INFO['stage'] = 4
                             player_runtime.INFO['to_attack_codes'] = []
+                            player_runtime.INFO['to_attack'] = False
+
 
                     # 3 最多3个物理攻击对象
                     elif x >= 860 and x < 950 and y >= 595 and y < 680 and len(player_runtime.INFO['to_attack_codes']) > 2:
@@ -168,6 +171,8 @@ def dojob(x,y,is_mouse_down,keys):
                             player_runtime.INFO['left_fighter_px'] = -180
                             player_runtime.INFO['stage'] = 4
                             player_runtime.INFO['to_attack_codes'] = []
+                            player_runtime.INFO['to_attack'] = False
+
                     # 4 返回图标
                     elif x >= 950 and x < 1040 and y >= 595 and y < 680:
                         loader.screen.blit(loader.SELECT_MENU, (950, 595))
@@ -198,7 +203,7 @@ def dojob(x,y,is_mouse_down,keys):
                     player_runtime.INFO['left_fighter_px'] = -180
                     player_runtime.INFO['stage'] = 4
                     player_runtime.INFO['to_attack_codes'] = []
-
+                    player_runtime.INFO['to_attack'] = False
 
             else:
                 # 绘制操作菜单
@@ -266,6 +271,7 @@ def dojob(x,y,is_mouse_down,keys):
                     else:
                         #AI暂时只发动主动进攻,不发动技能
                         ai_choice = random.randint(1,3)
+                        #行为概率脚本待定..
                         if ai_choice==1:
                             if len(player_runtime.INFO['to_attack_codes']) > 0:
                                 player_runtime.INFO['to_attack'] = True

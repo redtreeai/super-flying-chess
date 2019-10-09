@@ -22,8 +22,9 @@ def dojob(x,y,is_mouse_down,cheros,keys):
     # 如果结果不为6,且阵营没有出战角色，则跳过回合
     #测试的时候先都允许起飞
 
+    cheros = player_runtime.INFO['zdata'][player_runtime.INFO['turn']]
+
     if not player_runtime.INFO['sz_num'] in [4, 5]:
-        cheros = player_runtime.INFO['zdata'][player_runtime.INFO['turn']]
         in_war_flag = False
         for cr in cheros:
             if cr['in_war'] == True and cr['gowin']==False:
@@ -45,6 +46,7 @@ def dojob(x,y,is_mouse_down,cheros,keys):
                     # 跳到结算步骤b
                     player_runtime.INFO['stage'] = 5
             else:
+                #实际的AI操作时间待调整反馈
                 if player_runtime.AITP['st11'] < 60:
                     player_runtime.AITP['st11'] = player_runtime.AITP['st11'] + 1
                 else:
@@ -127,6 +129,7 @@ def dojob(x,y,is_mouse_down,cheros,keys):
     else:
         clen = len(player_runtime.INFO['ctb_codes'])
         if clen<1:
+            player_runtime.INFO['is_mention'] = False
             player_runtime.INFO['ctb_codes'] = []
             # 跳到结算步骤b
             player_runtime.INFO['stage'] = 5
