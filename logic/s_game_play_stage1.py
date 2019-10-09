@@ -134,6 +134,9 @@ def dojob(x,y,is_mouse_down,cheros,keys):
             # 跳到结算步骤b
             player_runtime.INFO['stage'] = 5
         else:
+            '''
+            选择移动的角色，目前是随机的，没有策略,可在此处加入策略模块
+            '''
             ai_choice = random.randint(1,len(player_runtime.INFO['ctb_codes']))
             if ai_choice==1:
                 player_runtime.INFO['moving_code'] = player_runtime.INFO['ctb_codes'][0]

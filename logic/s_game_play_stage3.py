@@ -269,8 +269,10 @@ def dojob(x,y,is_mouse_down,keys):
                                 player_runtime.INFO['stage'] = 5
 
                     else:
-                        #AI暂时只发动主动进攻,不发动技能
                         ai_choice = random.randint(1,3)
+                        '''
+                           移动后的三个抉择，决斗/技能/不行动  目前是随机，作用对象也是随机,待添加策略
+                        '''
                         #行为概率脚本待定..
                         if ai_choice==1:
                             if len(player_runtime.INFO['to_attack_codes']) > 0:
