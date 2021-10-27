@@ -1,3 +1,5 @@
+联系邮箱:gege0320@qq.com
+
 #友情提示
     
     1  游戏支持windows平台(exe)/linux平台(直接编译python脚本运行),但不支持Macos系统(MOjave版本冲突).  
